@@ -1,0 +1,630 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GatherMate2 - WoW Addon Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-green: #3fb950;
+            --accent-blue: #58a6ff;
+            --accent-purple: #a371f7;
+            --accent-orange: #d29922;
+            --accent-emerald: #10b981;
+            --border-color: #30363d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a1f35 0%, #0d1117 50%, #0f2922 100%);
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center top, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--accent-emerald), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .badge.version {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .badge.wow {
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
+        }
+
+        .badge.platform {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent-emerald);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-color);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 28px;
+            background: var(--accent-emerald);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-emerald);
+            transform: translateY(-3px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--accent-blue);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .node-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .node-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .node-card:hover {
+            border-color: var(--accent-emerald);
+        }
+
+        .node-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .node-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .node-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .commands-list {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .command-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .command-item:last-child {
+            border-bottom: none;
+        }
+
+        .command-code {
+            font-family: 'Fira Code', monospace;
+            background: var(--bg-tertiary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: var(--accent-emerald);
+            font-size: 0.9rem;
+            min-width: 180px;
+        }
+
+        .command-desc {
+            color: var(--text-secondary);
+        }
+
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .addon-tag {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 18px;
+            text-align: center;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .addon-tag:hover {
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+
+        .changelog {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .changelog h3 {
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+        }
+
+        .changelog ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .changelog li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .changelog li:last-child {
+            border-bottom: none;
+        }
+
+        .changelog li::before {
+            content: '✓';
+            color: var(--accent-green);
+            margin-right: 10px;
+        }
+
+        .install-steps {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .install-steps ol {
+            padding-left: 25px;
+        }
+
+        .install-steps li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+        }
+
+        .install-steps code {
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .support-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .support-link {
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .support-link.patreon {
+            background: #ff424d;
+            color: white;
+        }
+
+        .support-link.paypal {
+            background: #0070ba;
+            color: white;
+        }
+
+        .support-link:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .repo-info {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .repo-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .repo-info th,
+        .repo-info td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .repo-info th {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        .repo-info td {
+            color: var(--text-secondary);
+        }
+
+        .repo-info tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero">
+        <h1>GatherMate2</h1>
+        <p class="subtitle">Complete gathering node tracker for minimap and world map</p>
+
+        <div class="badges">
+            <span class="badge version">asc-1.0.7</span>
+            <span class="badge wow">WoW 3.3.5a</span>
+            <span class="badge platform">Project Ascension</span>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="https://github.com/Xurkon/GatherMate2/releases" class="btn btn-primary">
+                ⬇️ Download
+            </a>
+            <a href="https://github.com/Xurkon/GatherMate2" class="btn btn-secondary">
+                📂 View on GitHub
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <section>
+            <h2>Included Addons</h2>
+            <div class="repo-info">
+                <p style="color: var(--text-secondary); margin-bottom: 15px;">This repository contains both addons:</p>
+                <table>
+                    <tr>
+                        <th>Addon</th>
+                        <th>Version</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><strong>GatherMate2</strong></td>
+                        <td>asc-1.0.7</td>
+                        <td>Core gathering node tracker and display</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GatherMate2_Data</strong></td>
+                        <td>asc-1.0.2</td>
+                        <td>Pre-populated Wowhead data for all node types</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>Gathering Types</h2>
+            <div class="node-types">
+                <div class="node-card">
+                    <div class="node-icon">🌿</div>
+                    <div class="node-name">Herbalism</div>
+                    <div class="node-desc">All herb nodes</div>
+                </div>
+                <div class="node-card">
+                    <div class="node-icon">⛏️</div>
+                    <div class="node-name">Mining</div>
+                    <div class="node-desc">Ore veins & deposits</div>
+                </div>
+                <div class="node-card">
+                    <div class="node-icon">🌲</div>
+                    <div class="node-name">Woodcutting</div>
+                    <div class="node-desc">Tree nodes (Ascension)</div>
+                </div>
+                <div class="node-card">
+                    <div class="node-icon">☁️</div>
+                    <div class="node-name">Gas Clouds</div>
+                    <div class="node-desc">Engineering gases</div>
+                </div>
+                <div class="node-card">
+                    <div class="node-icon">🐟</div>
+                    <div class="node-name">Fishing</div>
+                    <div class="node-desc">Pools & hotspots</div>
+                </div>
+                <div class="node-card">
+                    <div class="node-icon">💰</div>
+                    <div class="node-name">Treasure</div>
+                    <div class="node-desc">Chests & lockboxes</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>📍 Dual Map Display</h3>
+                    <p>Nodes appear on both world map and minimap for easy navigation.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔄 Auto-Collection</h3>
+                    <p>Automatically records new node locations as you gather resources.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📤 Data Sharing</h3>
+                    <p>Share your node database with party and guild members.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🗺️ Routes Compatible</h3>
+                    <p>Works seamlessly with Routes addon for optimized farming paths.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 FarmHud Compatible</h3>
+                    <p>Pins display correctly on FarmHud's transparent HUD overlay.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎨 Customizable Icons</h3>
+                    <p>Adjust icon size, alpha, and minimap display range to your preference.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📥 Import/Export</h3>
+                    <p>Merge data from GatherMate2_Data or import from other sources.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Optimized</h3>
+                    <p>Efficient memory usage even with large node databases.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Commands</h2>
+            <div class="commands-list">
+                <div class="command-item">
+                    <code class="command-code">/gathermate2</code>
+                    <span class="command-desc">Open configuration panel</span>
+                </div>
+                <div class="command-item">
+                    <code class="command-code">/gm2</code>
+                    <span class="command-desc">Shortcut to open configuration</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Installation</h2>
+            <div class="install-steps">
+                <ol>
+                    <li>Download the latest release</li>
+                    <li>Extract both folders to <code>Interface/AddOns/</code>:
+                        <ul>
+                            <li><code>GatherMate2</code></li>
+                            <li><code>GatherMate2_Data</code></li>
+                        </ul>
+                    </li>
+                    <li>Enable both addons in character select</li>
+                    <li>Configure via <code>/gathermate2</code> command</li>
+                    <li>Import pre-populated data from the config panel</li>
+                </ol>
+            </div>
+        </section>
+
+        <section>
+            <h2>Addon Compatibility</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">Works seamlessly with these addons:</p>
+            <div class="addons-grid">
+                <div class="addon-tag">Routes</div>
+                <div class="addon-tag">FarmHud</div>
+                <div class="addon-tag">TomTom</div>
+                <div class="addon-tag">Carbonite</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Latest Changes</h2>
+            <div class="changelog">
+                <h3>GatherMate2 asc-1.0.7</h3>
+                <ul>
+                    <li>Full Ascension client compatibility</li>
+                    <li>Woodcutting node support</li>
+                    <li>Worldforge node support</li>
+                    <li>Minimap rotation support</li>
+                    <li>FarmHud HUD integration</li>
+                </ul>
+
+                <h3 style="margin-top: 20px;">GatherMate2_Data asc-1.0.2</h3>
+                <ul>
+                    <li>Updated node data for Ascension</li>
+                    <li>Added Worldforge data</li>
+                    <li>Added Tree (Woodcutting) data</li>
+                    <li>Includes all Wowhead node locations</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Created by <a href="https://github.com/Xurkon">Xurkon</a> •
+            Original Authors: Kagaro, Xinhuan, Nevcairiel, Xan</p>
+
+        <div class="support-links">
+            <a href="https://www.patreon.com/Xurkon" class="support-link patreon">❤️ Patreon</a>
+            <a href="https://www.paypal.com/donate?business=kancerous@gmail.com" class="support-link paypal">💙
+                PayPal</a>
+        </div>
+    </footer>
+</body>
+
+</html>
