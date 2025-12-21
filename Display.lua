@@ -575,10 +575,11 @@ end
 ]]
 function Display:MinimapZoom()
 	local zoom = Minimap:GetZoom()
+	-- Use pcall to avoid errors when Minimap is reparented by addons like FarmHud
 	if GetCVar("minimapZoom") == GetCVar("minimapInsideZoom") then
-		Minimap:SetZoom(zoom < 2 and zoom + 1 or zoom - 1)
+		pcall(function() Minimap:SetZoom(zoom < 2 and zoom + 1 or zoom - 1) end)
 	end
-	Minimap:SetZoom(zoom)
+	pcall(function() Minimap:SetZoom(zoom) end)
 	self:UpdateMiniMap()
 end
 --[[
