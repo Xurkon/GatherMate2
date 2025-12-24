@@ -3,7 +3,8 @@
 ![Version](https://img.shields.io/badge/version-asc--1.0.7-blue?style=for-the-badge) ![WoW Version](https://img.shields.io/badge/WoW-3.3.5a-orange?style=for-the-badge)
 [![Platform](https://img.shields.io/badge/platform-Project%20Ascension-green?style=for-the-badge)](https://ascension.gg/)
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue?style=for-the-badge)](https://Xurkon.github.io/GatherMate2/)
-![Downloads](https://img.shields.io/github/downloads/Xurkon/GatherMate2/total?style=for-the-badge&label=DOWNLOADS&color=e67e22)
+![Total Downloads](https://img.shields.io/github/downloads/Xurkon/GatherMate2/total?style=for-the-badge&label=TOTAL%20DOWNLOADS&color=e67e22)
+![Latest Release](https://img.shields.io/github/downloads/Xurkon/GatherMate2/latest/total?style=for-the-badge&label=LATEST%20RELEASE&color=3498db)
 [![Patreon](https://img.shields.io/badge/Patreon-Support-orange?style=for-the-badge&logo=patreon)](https://patreon.com/Xurkon)
 [![PayPal](https://img.shields.io/badge/PayPal-Donate-blue?style=for-the-badge&logo=paypal)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=kancerous@gmail.com)
 
